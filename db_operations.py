@@ -1,7 +1,5 @@
 import sqlite3
 
-
-
 def connectDB():
     connDB = sqlite3.connect('checkout_data.db')
     cursor = connDB.cursor()
@@ -23,12 +21,31 @@ def getAllCoworkers(cursor:sqlite3.Cursor):
 
     print('\n')
 
+    max_length = max(len(row[1]) for row in list)
+
     for row in list:
 
-        print(row,'\n')
+        print(f"Name: {row[1].ljust(max_length + 5)}Amount Paid: {str(row[2]).ljust(max_length + 5)}\tPreffered Coffee: {row[3]}\n")
     
     print("\n")
 
+def getAllCoffee(cursor:sqlite3.Cursor):
+    
+    cursor.execute('''
+                    SELECT *
+                    FROM COFFEE_LIST;
+                    ''')
+    
+    print('\n')
+
+    list = cursor.fetchall()
+
+    max_length = max(len(row[0]) for row in list)
+    
+    for row in list:
+        print(f"Name: {row[0].ljust(max_length + 5)}Price: {row[1]}\n")
+    
+    print('\n')
 
 def listCoffee(cursor:sqlite3.Cursor):
 
@@ -73,46 +90,3 @@ def insertCoworker(cursor:sqlite3.Cursor,db:sqlite3.Connection):
 
 
 
-def main():
-    user_input = ""
-
-    cursor,db = connectDB()
-
-    while user_input != "q":
-
-        print("Press 1 to insert a coworker.")
-
-        print("Press 2 to get the coworker paying today.")
-
-        print("Press 3 to get the list of coworkers.")
-
-        print("Press q to exit.\n")
-
-        user_input = input("Choose an option: ")
-
-        match user_input:
-
-            case "1":
-
-                insertCoworker(cursor,db)
-
-            case "2":
-                
-                pass
-
-            case "3":
-
-                getAllCoworkers(cursor)
-
-            case "q":
-
-                closeDB(db)
-                exit(1)
-
-            case _:
-
-                print("\nInvalid option\n")
-
-
-if __name__=="__main__": 
-	main() 
