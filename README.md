@@ -1,5 +1,5 @@
 # Bertram Labs Coding Challenge
----
+
 ## Getting Started
 
 #### Built with:
