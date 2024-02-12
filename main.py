@@ -1,4 +1,4 @@
-from db_operations import connectDB, insertCoworker, getAllCoworkers, closeDB, getAllCoffee
+from db_operations import connectDB, insertCoworker, getAllCoworkers, closeDB, getAllCoffee, insertCoffee,getPayingCoworker
 
 
 
@@ -6,8 +6,8 @@ def main():
     user_input = ""
 
     cursor,db = connectDB()
-
-    while user_input != "q":
+    print("\n")
+    while user_input != "6":
 
         print("1. Insert a coworker.")
 
@@ -31,11 +31,10 @@ def main():
 
             case "2":
 
-                pass
+                insertCoffee(cursor,db)
 
             case "3":
-                
-                pass
+                getPayingCoworker(cursor,db)
 
             case "4":
 
@@ -51,7 +50,6 @@ def main():
                 exit(1)
 
             case _:
-
                 print("\nInvalid option\n")
 
 
