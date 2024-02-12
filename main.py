@@ -47,7 +47,7 @@ def main():
             case "6":
 
                 closeDB(db)
-                exit(1)
+                exit(0)
 
             case _:
                 print("\nInvalid option\n")

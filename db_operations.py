@@ -24,12 +24,15 @@ def getAllCoworkers(cursor:sqlite3.Cursor):
 
     print('\n')
 
-    max_length = max(len(row[1]) for row in list)
+    if len(list) != 0:
+        max_length = max(len(row[1]) for row in list)
 
-    for row in list:
+        for row in list:
 
-        print(f"Name: {row[1].ljust(max_length + 5)}Amount Paid: {str(row[2]).ljust(max_length + 5)}\tPreffered Coffee: {row[3]}\n")
+            print(f"Name: {row[1].ljust(max_length + 5)}Amount Paid: {str(row[2]).ljust(max_length + 5)}\tPreffered Coffee: {row[3]}\n")
     
+    else:
+        print("There are no employees")
     print("\n")
 
 
@@ -160,14 +163,28 @@ def resetPaidPeriod(cursor:sqlite3.Cursor,db:sqlite3.Connection):
 
     db.commit()
 
-
+# updates when a person paid for coffees
 def updatePersonPaid(cursor:sqlite3.Cursor,db:sqlite3.Connection,id:int):
 
     cursor.execute(f'''
                     UPDATE EMPLOYEE_LIST
                     SET COWORKER_PAID = 1
-                    WHERE ID = {id};
-                    ''')
+                    WHERE ID = ?;
+                    ''',(id,))
     
     db.commit()
 
+
+# def updateMoneyPaid(cursor:sqlite3.Cursor,db:sqlite3.Connection,id:int):
+    
+#     cursor.execute('''
+#                     SELECT COWORKER_PAID
+#                     FROM EMPLOYEE_LIST
+#                     WHERE ID = 
+#                     ''')
+
+#     cursor.execute('''
+#                     SELECT SUM(cl.Price)
+#                     FROM Coffee_List cl, EMPLOYEE_LIST el
+#                     WHERE el.PREFERRED_COFFEE = cl.NAME;
+#                     ''')
