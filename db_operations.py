@@ -200,4 +200,5 @@ def updateMoneyPaid(cursor:sqlite3.Cursor,db:sqlite3.Connection,id:int):
                     WHERE ID = ?;
                     ''',(coworkerTotalPaid[0][0]+totalCoffeePayment[0][0],id))
     
+    db.commit()
 

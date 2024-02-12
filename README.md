@@ -4,7 +4,7 @@
 
 #### Built with:
 * `Python (Version 3.10.2)`
-* `SQLite`
+* `SQLite3`
 
 #### Installation:
 1. Clone the repo:
@@ -20,14 +20,14 @@ git clone https://github.com/DhrutikS257/Bertram-Coding-Challenge
 ---
 ## Roadmap:
 
-- [x] Feat: Getting the coworker paying
-- [x] Feat: Inserting new coworkers
-- [x] Feat: Inserting new coffees
-- [x] Feat: Getting list of coworkers
-- [x] Feat: Getting list of coffees
+- [x] Feat: Getting the coworker paying (will return the name of coworker paying for the coffe)
+- [x] Feat: Inserting new coworkers (will ask for name of coworker and their preffered coffee from the list)
+- [x] Feat: Inserting new coffees (will ask for coffe name and price)
+- [x] Feat: Getting list of coworkers (will show name, amount paid, and preffered coffee)
+- [x] Feat: Getting list of coffees (will show coffee name, and price)
 ---
 ## Assumptions:
 1. The order of payment will be from the coworker who has the most expensive coffee to least expensive
-2. Using CLI commands to insert data (coffe, coworker, etc.)
+2. Using CLI commands to insert data (coffee, coworker, etc.)
 
 
