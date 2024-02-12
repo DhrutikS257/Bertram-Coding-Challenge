@@ -150,8 +150,9 @@ def getPayingCoworker(cursor:sqlite3.Cursor,db:sqlite3.Connection):
 
     else:
         updatePersonPaid(cursor,db,paying_coworker[0][1])
+        updateMoneyPaid(cursor,db,paying_coworker[0][1])
 
-        print(f"Coworker paying today: {paying_coworker[0][0]}\n")
+        print(f"\nCoworker paying today: {paying_coworker[0][0]}\n")
 
 # resets all coworker's paid column
 def resetPaidPeriod(cursor:sqlite3.Cursor,db:sqlite3.Connection):
@@ -174,17 +175,29 @@ def updatePersonPaid(cursor:sqlite3.Cursor,db:sqlite3.Connection,id:int):
     
     db.commit()
 
-
-# def updateMoneyPaid(cursor:sqlite3.Cursor,db:sqlite3.Connection,id:int):
+# updates the total_paid for coworker whenever coworkers pays
+def updateMoneyPaid(cursor:sqlite3.Cursor,db:sqlite3.Connection,id:int):
     
-#     cursor.execute('''
-#                     SELECT COWORKER_PAID
-#                     FROM EMPLOYEE_LIST
-#                     WHERE ID = 
-#                     ''')
+    cursor.execute('''
+                    SELECT TOTAL_PAID
+                    FROM EMPLOYEE_LIST
+                    WHERE ID = ?;
+                    ''',(id,))
+    
+    coworkerTotalPaid = cursor.fetchall()
+    
+    cursor.execute('''
+                    SELECT SUM(cl.Price)
+                    FROM Coffee_List cl, EMPLOYEE_LIST el
+                    WHERE el.PREFERRED_COFFEE = cl.NAME;
+                    ''')
+    
+    totalCoffeePayment = cursor.fetchall()
 
-#     cursor.execute('''
-#                     SELECT SUM(cl.Price)
-#                     FROM Coffee_List cl, EMPLOYEE_LIST el
-#                     WHERE el.PREFERRED_COFFEE = cl.NAME;
-#                     ''')
+    cursor.execute('''
+                    UPDATE EMPLOYEE_LIST 
+                    SET TOTAL_PAID = ?
+                    WHERE ID = ?;
+                    ''',(coworkerTotalPaid[0][0]+totalCoffeePayment[0][0],id))
+    
+
