@@ -20,7 +20,7 @@ git clone https://github.com/DhrutikS257/Bertram-Coding-Challenge
 ---
 ## Roadmap:
 
-- [x] Feat: Getting the coworker paying (will return the name of coworker paying for the coffe)
+- [x] Feat: Getting the coworker paying (will return the name of coworker paying for the coffee)
 - [x] Feat: Inserting new coworkers (will ask for name of coworker and their preffered coffee from the list)
 - [x] Feat: Inserting new coffees (will ask for coffe name and price)
 - [x] Feat: Getting list of coworkers (will show name, amount paid, and preffered coffee)
